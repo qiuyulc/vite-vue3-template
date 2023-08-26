@@ -55,16 +55,15 @@
 </template>
 
 <script setup lang="ts">
+import { ElMessage } from 'element-plus'
 import { reactive, ref } from 'vue'
+import { useRouter } from 'vue-router'
 import type { FormInstance, FormRules } from 'element-plus'
-
+import type { RuleType } from '@/api/type'
+import { login } from '@/api/index'
+const router = useRouter()
 const ruleFormRef = ref<FormInstance>()
-type RuleType = {
-  name: string
-  pass: string
-  code: string
-  record: string
-}
+
 const ruleForm = reactive<RuleType>({
   name: '',
   pass: '',
@@ -102,7 +101,20 @@ const submitForm = (formEl: FormInstance | undefined) => {
   if (!formEl) return
   formEl.validate((valid) => {
     if (valid) {
-      console.log(valid)
+      login(ruleForm).then((res) => {
+        if (res.code === 200) {
+          ElMessage({
+            type: 'success',
+            message: '登录成功'
+          })
+          router.replace('/home')
+        } else {
+          ElMessage({
+            type: 'success',
+            message: `登录失败 ${res.msg}`
+          })
+        }
+      })
     } else {
       console.log('error submit!')
       return false

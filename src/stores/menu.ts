@@ -9,7 +9,11 @@ export const useMenuStore = defineStore('menu_data', {
   actions: {
     async handleMenuData() {
       return await getMenuData().then((res) => {
-        console.log(res)
+        if (res.code === 200) {
+          this.menu_data = res.result
+        }
+
+        return res
       })
     }
   }

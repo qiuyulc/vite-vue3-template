@@ -22,7 +22,7 @@ Mock.mock('/getMenu', function () {
         'msg': '',
         'result': [
             {
-                path: '/home',
+                path: 'home',
                 name: 'home',
                 component: 'HomeView',
                 meta: {
@@ -31,7 +31,7 @@ Mock.mock('/getMenu', function () {
                 }
             },
             {
-                path: '/about',
+                path: 'about',
                 name: 'about',
                 component: 'AboutView',
                 meta: {

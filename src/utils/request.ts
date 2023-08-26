@@ -30,7 +30,7 @@ instance.interceptors.response.use(
     if (response.headers.authentication) {
       localStorage.setItem('Authorization', `Bearer ${response.headers.authentication}`)
     }
-    if (response.data.code && response.data.code !== 0) {
+    if (response.data.code && response.data.code !== 200) {
       ElMessage.error(response.data.msg)
     }
     if (response.data.code && response.data.code === 401) {
